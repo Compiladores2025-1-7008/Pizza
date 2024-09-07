@@ -1,0 +1,36 @@
+<project name="P2" default="run" basedir=".">
+    <property name="src.dir" location="src"/>
+    <property name="build.dir" location="build"/>
+    <property name="jflex.dir" location="src/main/jflex"/>
+    <property name="java.dir" location="src/main/java"/>
+    <property name="test.file" location="src/tst/prueba.txt"/>
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <mkdir dir="${build.dir}"/>
+    </target>
+
+    <target name="generate-lexer" depends="clean">
+        <mkdir dir="${jflex.dir}"/>
+        <exec executable="jflex">
+            <arg value="${jflex.dir}/Lexer.flex"/>
+        </exec>
+    </target>
+
+    <target name="compile" depends="generate-lexer">
+        <mkdir dir="${build.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime="false">
+            <include name="main/java/**/*.java"/>
+            <include name="main/jflex/Lexer.java"/>
+        </javac>
+    </target>
+
+    <target name="run" depends="compile">
+        <java classname="main.jflex.Lexer" fork="true" failonerror="true">
+            <classpath>
+                <pathelement path="${build.dir}"/>
+            </classpath>
+            <arg value="${test.file}"/>
+        </java>
+    </target>
+</project>

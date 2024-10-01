@@ -1,0 +1,102 @@
+\documentclass[compacto]{aleph-notas}
+
+\usepackage{aleph-comandos}
+\usepackage{enumitem}
+\usepackage{parskip}
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{bm}
+\graphicspath{ {./img/} }
+\setlength\parindent{0pt}
+
+\institucion{Complejidad\\Computacional}
+\autor{Maximiliano Onofre Martínez \\422054438}
+\tema{Práctica 3}
+\fuente{montserrat}
+\logouno[6.5cm]{img/fc}
+
+\begin{document}
+\encabezado
+
+\section*{Ejercicio 1}
+
+\begin{flalign*}
+  G &= \{N, \Sigma , P , S\} &&\\
+  P &= \{\\
+    &programa \rightarrow declaraciones \, sentencias\\
+    &declaraciones \rightarrow declaraciones \, declaracion \, | \, declaracion \\
+    &declaracion \rightarrow tipo \, lista\_var \, ;\\
+    &tipo \rightarrow \bm{int} \, | \, \bm{float}\\
+    &lista\_var \rightarrow lista\_var, \, \bm{identificador} \, | \, \bm{identificador}\\
+    &sentencias \rightarrow sentencias \, sentencia \, | \, sentencia\\
+    &sentencia \rightarrow \bm{identificador} = expresion \, ; \, | \\
+    &\bm{if} \, (expresion) \, sentencias \, \bm{else} \, sentencias \, | \, \bm{while} \, (expresion) \, sentencias\\
+    &expresion \rightarrow expresion + expresion \, | \, expresion - expresion \, | \\
+    &expresion * expresion \, | \, expresion / expresion \, | \, \bm{identificador} \, | \, \bm{numero}\\
+  & expresion \rightarrow (expresion)\\
+  \}\\
+  N &= \{programa, declaraciones, declaracion,tipo,lista\_var,sentencias,\\
+  &sentencia,expresion\}\\
+  \Sigma &= \{\bm{int},\bm{float},\bm{identificador},\bm{numero},\bm{if},\bm{else},\bm{while},+,-,*,/,=,\\
+    &\bm{;},\bm{,},\textbf{(},\textbf{)}\}\\
+      S &= program
+\end{flalign*}
+\newpage
+\section*{Ejercicio 2: Eliminación de la Ambigüedad}
+\begin{flalign*}
+  &sentencia\_completa \rightarrow \bm{if} \, (expresion) \, sentencia\_completa \, \bm{else} && \\
+  &sentencia\_completa \, | \, \bm{while} \, (expresion) \, sentencias \, | \\
+  &identificador = expresion \, ;\\
+  &sentencia\_incompleta \rightarrow \bm{if} \, (expresion) \, sentencia\_completa \, | \\
+  &\bm{while} \, (expresion) \, sentencias \, ;
+\end{flalign*}
+\section*{Ejercicio 3: Eliminación de la Recursividad Izquierda}
+\begin{flalign*}
+  &declaraciones \rightarrow declaracion \, declaraciones' &&\\
+  &declaraciones' \rightarrow declaracion \, declaraciones' \, | \, \epsilon \\\\
+  &sentencias \rightarrow sentencia \, sentencias' \\
+  &sentencias' \rightarrow sentencia \, sentencias' \, | \, \epsilon
+\end{flalign*}
+\section*{Ejercicio 4: Factorización Izquierda}
+\begin{flalign*}
+  &expresion \rightarrow expresion\_suma &&\\
+  &expresion\_suma \rightarrow expresion\_suma + expresion\_producto \, |\\
+  &expresion\_suma - expresion\_producto \, | \, expresion\_producto \\
+  &expresion\_producto \rightarrow expresion\_producto * factor \, | \\
+  &expresion\_producto / factor \, | \, factor\\
+  &factor \rightarrow identificador \, | \, numero \, | \, (expresion)
+\end{flalign*}
+\newpage
+\section*{Ejercicio 5}
+\begin{flalign*}
+  P &= \{\\
+    &programa \rightarrow declaraciones \, sentencias\\
+ &declaraciones \rightarrow declaracion \, declaraciones' &&\\
+  &declaraciones' \rightarrow declaracion \, declaraciones' \, | \, \epsilon \\
+    &declaracion \rightarrow tipo \, lista\_var \, ;\\
+    &tipo \rightarrow \bm{int} \, | \, \bm{float}\\
+    &lista\_var \rightarrow lista\_var, \, \bm{identificador} \, | \, \bm{identificador}\\
+   &sentencias \rightarrow sentencia \, sentencias' \\
+    &sentencias' \rightarrow sentencia \, sentencias' \, | \, \epsilon\\\\
+  &sentencia \rightarrow sentencia\_completa \, | \, sentencia\_incompleta\\
+  &sentencia\_completa \rightarrow \bm{if} \, (expresion) \, sentencia\_completa \, \bm{else} && \\
+  &sentencia\_completa \, | \, \bm{while} \, (expresion) \, sentencias \, | \\
+  &identificador = expresion \, ;\\
+  &sentencia\_incompleta \rightarrow \bm{if} \, (expresion) \, sentencia\_completa \, | \\
+  &\bm{while} \, (expresion) \, sentencias \, ;\\\\
+    &expresion \rightarrow expresion + expresion \, | \, expresion - expresion \, | \\
+    &expresion * expresion \, | \, expresion / expresion \, | \, \bm{identificador} \, | \, \bm{numero}\\
+  & expresion \rightarrow (expresion)\\
+  \}\\ \\
+  N &= \{programa,declaraciones, declaraciones',declaracion,tipo,\\
+    &lista\_var,sentencias,sentencias',sentencia,sentencia\_completa,\\
+  &sentencia\_incompleta,expresion\}
+\end{flalign*}
+
+\end{document}

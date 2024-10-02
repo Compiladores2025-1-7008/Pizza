@@ -1,5 +1,4 @@
 package main.java;
-
 public class Token {
     private int clase;
     private String lexema;

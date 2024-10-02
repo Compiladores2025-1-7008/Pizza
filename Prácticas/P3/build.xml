@@ -1,0 +1,64 @@
+<project name="Proyecto" default="run-main" basedir=".">
+    <!-- Directorios -->
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="build"/>
+    <property name="tst.dir" value="tst"/>
+    <property name="jflex.dir" value="${src.dir}/main/jflex"/>
+
+    <!-- Crear el directorio build -->
+    <target name="init">
+        <mkdir dir="${build.dir}"/>
+    </target>
+
+    <!-- Eliminar el archivo Lexer.java antes de regenerarlo para run-main -->
+    <target name="clean-lexer1">
+        <delete file="${jflex.dir}/Lexer.java"/>
+    </target>
+
+    <!-- Ejecutar JFlex para el primer Lexer (run-main) -->
+    <target name="jflex-lexer1" depends="clean-lexer1">
+        <exec executable="jflex">
+            <arg value="${jflex.dir}/Lexer.flex"/>
+        </exec>
+    </target>
+
+    <!-- Compilar Main.java con el Lexer generado para run-main -->
+    <target name="compile-main" depends="jflex-lexer1">
+        <javac sourcepath="${src.dir}" destdir="${build.dir}">
+            <src path="${src.dir}"/>
+        </javac>
+    </target>
+
+    <!-- Ejecutar Main.java con el archivo de prueba para run-main -->
+    <target name="run-main" depends="compile-main">
+        <java classname="main.java.Main" fork="true" classpath="${build.dir}">
+            <arg value="${tst.dir}/prueba.txt"/>
+        </java>
+    </target>
+
+    <!-- Eliminar el archivo Lexer.java antes de regenerarlo para run-main2 -->
+    <target name="clean-lexer2">
+        <delete file="${jflex.dir}/Lexer.java"/>
+    </target>
+
+    <!-- Ejecutar JFlex para el segundo Lexer (run-main2) -->
+    <target name="jflex-lexer2" depends="clean-lexer2">
+        <exec executable="jflex">
+            <arg value="${jflex.dir}/Lexer2.flex"/>
+        </exec>
+    </target>
+
+    <!-- Compilar Main2.java con el Lexer generado para run-main2 -->
+    <target name="compile-main2" depends="jflex-lexer2">
+        <javac sourcepath="${src.dir}" destdir="${build.dir}">
+            <src path="${src.dir}"/>
+        </javac>
+    </target>
+
+    <!-- Ejecutar Main2.java con el archivo de prueba para run-main2 -->
+    <target name="run-main2" depends="compile-main2">
+        <java classname="main.java.Main2" fork="true" classpath="${build.dir}">
+            <arg value="${tst.dir}/prueba.txt"/>
+        </java>
+    </target>
+</project>

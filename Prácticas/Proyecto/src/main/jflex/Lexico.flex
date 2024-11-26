@@ -38,6 +38,7 @@
 "==" { return Parser.IGUALDAD; }
 
 "def"      { return Parser.DEF; }
+"struct"   { return Parser.STRUCT; }
 "register" { return Parser.REGISTER; }
 "int"      { return Parser.INT; }
 "float"    { return Parser.FLOAT; }

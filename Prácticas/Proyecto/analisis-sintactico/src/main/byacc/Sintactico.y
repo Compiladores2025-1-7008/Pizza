@@ -108,9 +108,10 @@ z : z PUNTO ID
   }
 
   public static void main(String args[]) throws IOException {
-    System.out.println("test");
 
     Parser yyparser = new Parser(new FileReader(args[0]));;
-
-    yyparser.yyparse();
+    int i = yyparser.yyparse();
+    if (i == 0) {
+      System.out.println("Analisis exitoso");
+    }
   }

@@ -5,9 +5,9 @@
 
 %option yylineno
 
-alpha [a-zA-Z]
-digit [0-9]
-unary "++"|"--"
+letra [a-zA-Z]
+digito [0-9]
+unario "++"|"--"
 
 %%
 
@@ -24,10 +24,10 @@ unary "++"|"--"
 ^"#include"[ ]*<.+\.h>      { return INCLUDE; }
 "true"                      { return TRUE; }
 "false"                     { return FALSE; }
-[-]?{digit}+                { return NUMERO; }
-[-]?{digit}+\.{digit}{1,6}  { return FLOAT_NUM; }
-{alpha}({alpha}|{digit})*   { return ID; }
-{unary}                     { return UNARIO; }
+[-]?{digito}+                { return NUMERO; }
+[-]?{digito}+\.{digito}{1,6}  { return FLOAT_NUM; }
+{letra}({letra}|{digito})*   { return ID; }
+{unario}                     { return UNARIO; }
 "<="                        { return MENOR_O_IGUAL; }
 ">="                        { return MAYOR_O_IGUAL; }
 "=="                        { return IGUALDAD; }

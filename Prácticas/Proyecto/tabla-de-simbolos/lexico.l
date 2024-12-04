@@ -40,8 +40,6 @@ unario "++"|"--"
 "-"                         { return RESTA; }
 "/"                         { return DIV; }
 "*"                         { return MULT; }
-\/\/.*                      { ; }
-\/\*(.*\n)*.*\*\/           { ; } 
 [ \t]*                      { ; }
 [\n]                        { countn++; }
 .	                    { return *yytext; }
